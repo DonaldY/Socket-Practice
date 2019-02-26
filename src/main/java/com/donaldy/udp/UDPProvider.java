@@ -48,4 +48,33 @@ public class UDPProvider {
         datagramSocket.close();
 
     }
+
+    private static class Provider extends Thread {
+
+        private final String sn;
+        private boolean done = false;
+        private DatagramSocket ds = null;
+
+        public Provider(String sn) {
+            super();
+            this.sn = sn;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+        }
+
+        void exit() {
+            this.done = true;
+            close();
+        }
+
+        private void close() {
+            if (ds != null) {
+                ds.close();
+                ds = null;
+            }
+        }
+    }
 }
